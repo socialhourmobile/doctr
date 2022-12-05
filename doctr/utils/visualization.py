@@ -288,7 +288,7 @@ def synthesize_page(
                 ymin, ymax = int(round(h * ymin)), int(round(h * ymax))
 
                 # White drawing context adapted to font size, 0.75 factor to convert pts --> pix
-                font = get_font(font_family, int(0.75 * (ymax - ymin)))
+                font = get_font(font_family, int(0.33 * (ymax - ymin)))
                 img = Image.new("RGB", (xmax - xmin, ymax - ymin), color=(255, 255, 255))
                 d = ImageDraw.Draw(img)
                 # Draw in black the value of the word
