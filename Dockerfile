@@ -11,6 +11,7 @@ COPY ./doctr /tmp/doctr
 
 RUN apt-get update \
     && apt-get install libgl1 \
+    && apt-get install -y python3-opencv \
     && apt-get install ffmpeg libsm6 libxext6 -y \
     && pip install --upgrade pip setuptools wheel \
     && pip install -e /tmp/.[tf] \
