@@ -286,17 +286,20 @@ def synthesize_page(
                 (xmin, ymin), (xmax, ymax) = word["geometry"]
                 xmin, xmax = int(round(w * xmin)), int(round(w * xmax))
                 ymin, ymax = int(round(h * ymin)), int(round(h * ymax))
+                x_scaled_size = int(round(0.5 * (xmax - xmin)))
+                y_scaled_size = int(round(0.5 * (ymax - ymin)))
 
                 # White drawing context adapted to font size, 0.75 factor to convert pts --> pix
-                font = get_font(font_family, int(0.33 * (ymax - ymin)))
-                img = Image.new("RGB", (0.5 * (xmax - xmin), 0.5 * (ymax - ymin)), color=(255, 255, 255))
+                fontSize = int(round(0.3 * y_scaled_size))
+                font = get_font(font_family, fontSize)
+                img = Image.new("RGB", (x_scaled_size, y_scaled_size), color=(255, 255, 255))
                 d = ImageDraw.Draw(img)
                 # Draw in black the value of the word
                 try:
-                    d.text((0, 0), word["value"], font=font, fill=(0, 0, 0))
+                    d.text((0, int(round(0.5 * y_scaled_size)) - int(round(0.5 * fontSize))), word["value"], font=font, fill=(0, 0, 0))
                 except UnicodeEncodeError:
                     # When character cannot be encoded, use its unidecode version
-                    d.text((0, 0), unidecode(word["value"]), font=font, fill=(0, 0, 0))
+                    d.text((0, int(round(0.5 * y_scaled_size)) - int(round(0.5 * fontSize))), unidecode(word["value"]), font=font, fill=(0, 0, 0))
 
                 # Colorize if draw_proba
                 if draw_proba:
