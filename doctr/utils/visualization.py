@@ -290,7 +290,7 @@ def synthesize_page(
                 y_scaled_size = int(round(0.5 * (ymax - ymin)))
 
                 # White drawing context adapted to font size, 0.75 factor to convert pts --> pix
-                fontSize = int(round(0.3 * y_scaled_size))
+                fontSize = int(round(0.15 * x_scaled_size))
                 font = get_font(font_family, fontSize)
                 img = Image.new("RGB", (x_scaled_size, y_scaled_size), color=(255, 255, 255))
                 d = ImageDraw.Draw(img)
